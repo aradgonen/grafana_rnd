@@ -1,0 +1,16 @@
+name: testOnRelease
+
+on:
+  release:
+    types: [released]
+jobs:
+  printRef:
+    runs-on: ubuntu-20.04
+    steps:
+     - uses: actions/checkout@v3
+       with:
+        clean: 'false'
+        ref: ${{ github.ref }} 
+     - name: print
+       run: |
+        echo ${{ github.ref }}
