@@ -13,4 +13,4 @@ jobs:
         ref: ${{ github.ref }} 
      - name: print
        run: |
-        echo ${{ github.sha }}
+        echo ${{ github.event.release.tag_name }}
