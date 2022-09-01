@@ -13,4 +13,4 @@ jobs:
         ref: ${{ github.ref }} 
      - name: print
        run: |
-        echo ${{ github.}}
+        echo ${{ github.sha }}
