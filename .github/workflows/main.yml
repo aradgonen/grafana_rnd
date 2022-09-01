@@ -13,4 +13,4 @@ jobs:
         ref: ${{ github.ref }} 
      - name: print
        run: |
-        echo ${{ github.ref }}
+        echo ${{ github.ref_name }}
