@@ -1,0 +1,15 @@
+---
+modules:
+  default:
+    metrics:
+      - name: GK8
+        type: object
+        help: General statistics of the top cryptocurrencies
+        path: "{$.ColdHealthInformation[*]}"
+        labels:
+          ArrivalTime: "{$.ArrivalTime}"
+          ProductId: "{$.ProductId}"
+        values:
+          ProductVersion: '{$.ProductVersion}'
+    headers:
+      Authorization: Basic YWRtaW46cGFzc3dvcmQ=
