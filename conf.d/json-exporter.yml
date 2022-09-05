@@ -4,12 +4,11 @@ modules:
     metrics:
       - name: GK8
         type: object
-        help: General statistics of the top cryptocurrencies
-        path: "{$.ColdHealthInformation[*]}"
+        help: General statistics Wallet
+        path: "{ $.data[*] }"
         labels:
-          ArrivalTime: "{$.ArrivalTime}"
-          ProductId: "{$.ProductId}"
+          id: "{$.id}"
         values:
-          ProductVersion: '{$.ProductVersion}'
-    headers:
-      Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+          cpu_util: '{$.cpu_util}'
+          balance: '{$.balance}'
+          number: '{$.number}'

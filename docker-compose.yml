@@ -1,26 +1,6 @@
 version: '3.7'
 
 services:
-  # node-exporter:
-  #   image: prom/node-exporter:latest
-  #   hostname: node-exporter
-  #   restart: always
-  #   volumes:
-  #     - /proc:/host/proc:ro
-  #     - /sys:/host/sys:ro
-  #     - /:/rootfs:ro
-  #   command:
-  #     - '--path.procfs=/host/proc'
-  #     - '--path.rootfs=/rootfs'
-  #     - '--path.sysfs=/host/sys'
-  #     - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-  #   expose:
-  #     - 9100
-  #   ports:
-  #     - "9100:9100"
-  #   networks:
-  #     - monitoring
-  
   prometheus:
     image: prom/prometheus:latest
     hostname: prometheus
@@ -38,17 +18,17 @@ services:
       - 9090
     ports:
       - 9090:9090
-    # networks:
-    #   - monitoring
+
+
   grafana:
-    image: grafana/grafana:9.1.1-ubuntu
+    image: grafana/grafana:9.1.2-ubuntu
     hostname: grafana
     ports:
       - "3000:3000"
     volumes:
       - "grafana_data:/var/lib/grafana"
-    # networks:
-    #   - monitoring
+
+
   json-exporter:
     image: quay.io/prometheuscommunity/json-exporter
     hostname: json-exporter
@@ -56,57 +36,15 @@ services:
       - "7979:7979"
     volumes:
       - ./conf.d/json-exporter.yml:/config.yml:ro
-  couchdb:
-    image: couchdb
-    hostname: couchdb
-    environment:
-      - COUCHDB_USER=admin
-      - COUCHDB_PASSWORD=password
+
+
+  simple_api:
+    image: simple_api:latest
+    hostname: api
     ports:
-      - "5984:5984"
-    # networks:
-    #   - monitoring
-  # blackbox-exporter:
-  #   image: prom/blackbox-exporter
-  #   hostname: blackbox-exporter
-  #   ports:
-  #     - "0.0.0.0:9115:9115"
-  #   command:
-  #     - "--config.file=/etc/blackbox/blackbox.yml"
-  #   volumes:
-  #     - ./conf.d/blackbox-exporter.yml:/etc/blackbox/blackbox.yml:ro
-    # networks:
-    #   - monitoring
-  # pushgateway:
-  #   image: prom/pushgateway
-  #   hostname: pushgateway
-  #   ports:
-  #     - "9091:9091"
-  #   networks:
-  #     - monitoring
-  # influxdb:
-  #   image: influxdb:latest
-  #   hostname: influxdb
-  #   volumes:
-  #     - ./influx:/root/.influxdb2
-  #   ports:
-  #     - "8086:8086"
-  #   networks:
-  #     - monitoring
-  # telegraf:
-  #   image: telegraf:latest
-  #   volumes:
-  #     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
-  #   depends_on:
-  #     - influxdb
-  #   ports:
-  #     - "8125:8125"
-  #   networks:
-  #     - monitoring
+      - "5000:5000"
+
     
 volumes:
   prometheus_data: {}
   grafana_data: {}
-# networks:
-#   monitoring:
-#     driver: bridge

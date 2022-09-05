@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  
+  grafana:
+    image: grafana/grafana:9.1.2-ubuntu
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana_data:/var/lib/grafana"
+
+
+  influxdb:
+    image: influxdb:latest
+    hostname: influxdb
+    volumes:
+      - ./influx/influxdb:/root/influxdb/data
+      - ./influx/influxdb2:/var/lib/influxdb2
+      - ./influx/influxdb2-config:/etc/influxdb2
+      - ./conf.d/influxdb.conf:/root/influxdb/influxdb.conf
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=arad
+      - DOCKER_INFLUXDB_INIT_PASSWORD=arad123456789
+      - DOCKER_INFLUXDB_INIT_ORG=gk8
+      - DOCKER_INFLUXDB_INIT_BUCKET=data
+      - INFLUXDB_HTTP_LOG_ENABLED=true
+    ports:
+      - "8086:8086"
+
+  telegraf:
+    image: telegraf:latest
+    hostname: telegraf
+    volumes:
+      - ./conf.d/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf:/telegraf
+    environment:
+      - INFLUX_TOKEN=t8p7Dh3zUqcFtyTHvSXvCH3ZuGPVU2g3XCQuohsZfeEO25NBNv2mUqY5zQq4ZFK8We_smh-L9J0DpdVbHFUuuA==
+    ports:
+      - "8125:8125"
+      - "8100:8100"
+
+
+volumes:
+  grafana_data: {}

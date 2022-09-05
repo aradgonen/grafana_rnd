@@ -1,0 +1,20 @@
+[default]
+  url = "http://localhost:8086"
+  token = "CfpW6AO1biF3bJSItYd04OJJwPf35yQecp2UNIRgy1B-wiPbdj7mBEsYdTxY15V2Dqdv8bOccSOPzdx_zP3yHg=="
+  org = "gk8"
+  active = true
+# 
+# [eu-central]
+#   url = "https://eu-central-1-1.aws.cloud2.influxdata.com"
+#   token = "XXX"
+#   org = ""
+# 
+# [us-central]
+#   url = "https://us-central1-1.gcp.cloud2.influxdata.com"
+#   token = "XXX"
+#   org = ""
+# 
+# [us-west]
+#   url = "https://us-west-2-1.aws.cloud2.influxdata.com"
+#   token = "XXX"
+#   org = ""
