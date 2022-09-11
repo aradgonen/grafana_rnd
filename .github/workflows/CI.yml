@@ -28,6 +28,7 @@ jobs:
         run: |
           make -i build | tee /tmp/run.out
       - name: search for error
+        if: always()
         run: |
           cat /tmp/run.out | grep "Error 1"
 
