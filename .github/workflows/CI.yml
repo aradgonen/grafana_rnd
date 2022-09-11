@@ -26,9 +26,9 @@ jobs:
       - name: Run a multi-line script
         id: test
         run: |
-          make -i build | tee /tmp/run.out
+          make -i build | tee run.out
       - name: search for error
         if: always()
         run: |
-          cat /tmp/run.out | grep "Error 1"
+          cat run.out | grep "Error 1"
 
