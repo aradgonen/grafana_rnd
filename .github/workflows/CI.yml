@@ -26,9 +26,8 @@ jobs:
       - name: Run a multi-line script
         id: test
         run: |
-          make -i build
+          make -i build | tee /tmp/run.out
       - name: search for error
         run: |
-          echo ${{ steps.test.outputs }}
-          if [[ ${{ steps.test.outputs.random_number }} == 0 ]]; then exit 0; else exit 1; fi
+          cat /tmp/run.out | grep "Error 1"
 
